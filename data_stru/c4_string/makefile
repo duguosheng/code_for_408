@@ -4,4 +4,3 @@ all:
 
 clean:
 	cd seq; make clean
-	cd algo; make clean
