@@ -39,8 +39,8 @@ void GetNextval(const SqString& s, int nextval[]) {
 
 int IndexKMP(const SqString& s, const SqString& p) {
     int i = 1, j = 1;
-    int* nextval = new int(p.Length());  //分配nextval数组内存空间
-    GetNextval(p, nextval);              //求得nextval数组
+    int* nextval = new int[p.Length() + 1];  //分配nextval数组内存空间
+    GetNextval(p, nextval);                  //求得nextval数组
     while (i <= s.Length() && j <= p.Length()) {
         if (j == 0 || s[i] == p[j]) {  //继续比较后续字符
             ++i;

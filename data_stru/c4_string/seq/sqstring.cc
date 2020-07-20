@@ -58,13 +58,51 @@ int SqString::Compare(const SqString& s) {
         return 0;
 }
 SqString SqString::SubString(int pos, int len) {
-    char* sub = ch + pos - 1;
+    char sub[len + 1];
+    char* start = ch + pos - 1;
+    for (int i = 0; i < len; ++i) {
+        sub[i] = *start++;
+    }
+    sub[len] = '\0';
     return SqString(sub);
 }
 
-int SqString::Index(SqString sub) {
-    //后续利用Kmp实现
-    return 0;
+void SqString::GetNextVal(const SqString& s, int nextval[]) {
+    int i = 1, j = 0;
+    nextval[1] = 0;
+    while (i < s.Length()) {
+        if (j == 0 || s[i] == s[j]) {
+            ++i;
+            ++j;
+            if (s[i] != s[j])
+                nextval[i] = j;
+            else
+                nextval[i] = nextval[j];
+        } else
+            j = nextval[j];
+    }
+}
+int SqString::Index(const SqString& sub) {
+    int i = 1, j = 1;
+    int* nextval = new int[sub.Length() + 1];
+    GetNextVal(sub, nextval);
+
+    while (i <= Length() && j <= sub.Length()) {
+        if (j == 0 || At(i) == sub[j]) {
+            ++i;
+            ++j;
+        } else {
+            j = nextval[j];
+        }
+    }
+    delete nextval;
+    if (j > sub.Length())  //匹配成功
+        return i - sub.Length();
+
+    return 0;  //匹配失败
+}
+int SqString::Index(const char* sub) {
+    return Index(SqString(sub));
 }
 
 char& SqString::operator[](size_t n) {

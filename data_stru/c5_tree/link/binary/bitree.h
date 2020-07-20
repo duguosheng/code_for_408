@@ -14,14 +14,18 @@
 #define DONT_CREATE_NODE 0  //宏定义当接收到数据为0时不创建结点
 
 class BiTree {
+    friend class BinSortTree;
+
 public:
     using ElemType = int;
     using IniList = std::initializer_list<ElemType>;
     using IniIter = std::initializer_list<ElemType>::iterator;
 
-private:
+protected:
     struct BiNode;
     BiNode* root;
+
+private:
     void PreOrder(BiNode* node, std::ostream& os);   //递归完成前序遍历
     void InOrder(BiNode* node, std::ostream& os);    //递归完成中序遍历
     void PostOrder(BiNode* node, std::ostream& os);  //递归完成后序遍历

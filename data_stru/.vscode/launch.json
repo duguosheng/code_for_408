@@ -23,7 +23,7 @@
             "windows": {
                 "MIMode": "gdb",
                 "miDebuggerPath": "gdb.exe",
-                "program": "${workspaceFolder}/c5_tree/link/binary/bitree.exe"
+                "program": "${workspaceFolder}/c8_sort/quicksort.exe"
             },
             "preLaunchTask": "build"
         }

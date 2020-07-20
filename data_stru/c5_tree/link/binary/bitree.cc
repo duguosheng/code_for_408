@@ -4,7 +4,10 @@
 #include <queue>
 #include <stack>
 
-using namespace std;
+using std::istream;
+using std::ostream;
+using std::queue;
+using std::stack;
 
 //结点构造函数
 BiTree::BiNode::BiNode() : data(0), lchild(nullptr), rchild(nullptr) {}
@@ -14,9 +17,9 @@ BiTree::BiNode::BiNode(BiNode* l, BiNode* r) : data(0), lchild(l), rchild(r) {}
 BiTree::BiNode::BiNode(ElemType e, BiNode* l, BiNode* r)
     : data(e), lchild(l), rchild(r) {}
 
-BiTree::BiTree() : root() {}
+BiTree::BiTree() : root(nullptr) {}
 
-BiTree::BiTree(initializer_list<ElemType> il) {
+BiTree::BiTree(IniList il) {
     auto beg_iter = il.begin();
     auto end_iter = il.end();
     Create(root, beg_iter, end_iter);
@@ -57,7 +60,7 @@ BiTree::BiNode* BiTree::operator->() const {
 }
 
 //前序遍历，根节点->左孩子->右孩子
-void BiTree::PreOrder(BiNode* node, std::ostream& os) {
+void BiTree::PreOrder(BiNode* node, ostream& os) {
     if (!node)
         return;
     os << node->data << " ";
@@ -66,7 +69,7 @@ void BiTree::PreOrder(BiNode* node, std::ostream& os) {
 }
 
 //中序遍历，左孩子->根节点->右孩子
-void BiTree::InOrder(BiNode* node, std::ostream& os) {
+void BiTree::InOrder(BiNode* node, ostream& os) {
     if (!node)
         return;
     InOrder(node->lchild, os);
@@ -75,7 +78,7 @@ void BiTree::InOrder(BiNode* node, std::ostream& os) {
 }
 
 //后序遍历，左孩子->右孩子->根节点
-void BiTree::PostOrder(BiNode* node, std::ostream& os) {
+void BiTree::PostOrder(BiNode* node, ostream& os) {
     if (!node)
         return;
     PostOrder(node->lchild, os);
@@ -83,17 +86,17 @@ void BiTree::PostOrder(BiNode* node, std::ostream& os) {
     os << node->data << " ";
 }
 
-void BiTree::PreOrder(std::ostream& os) {
+void BiTree::PreOrder(ostream& os) {
     PreOrder(root, os);
 }
-void BiTree::InOrder(std::ostream& os) {
+void BiTree::InOrder(ostream& os) {
     InOrder(root, os);
 }
-void BiTree::PostOrder(std::ostream& os) {
+void BiTree::PostOrder(ostream& os) {
     PostOrder(root, os);
 }
 
-void BiTree::PreOrder1(std::ostream& os) {
+void BiTree::PreOrder1(ostream& os) {
     stack<BiNode*> sbn;          //利用栈进行遍历
     BiNode* p = root;            // p是遍历指针
     while (p || !sbn.empty()) {  //栈不为空或p有意义则循环继续

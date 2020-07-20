@@ -27,8 +27,9 @@ public:
     int Compare(const SqString& str);  //比较
     //返回从第pos个字符起，长度为len的子串
     SqString SubString(int pos, int len);
-    int Index(SqString sub);  //找寻子串位置
-    void Clear();             //清空
+    int Index(const SqString& sub);  //找寻子串位置
+    int Index(const char* sub);      //找寻子串位置
+    void Clear();                    //清空
 
     //定义下标运算符
     char& operator[](std::size_t n);
@@ -42,8 +43,9 @@ public:
     bool operator>(const SqString& rhs);
 
 private:
-    char ch[MAX_SIZE];   //字符
-    std::size_t length;  //长度
+    char ch[MAX_SIZE];                                  //字符
+    std::size_t length;                                 //长度
+    void GetNextVal(const SqString& p, int nextval[]);  //获取nextval数组
 };
 
 SqString operator+(const SqString& lhs, const SqString& rhs);
